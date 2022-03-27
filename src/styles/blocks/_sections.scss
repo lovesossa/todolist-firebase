@@ -1,0 +1,16 @@
+//---------------------------------------------sections
+.section {
+	position: relative;
+
+	width: 100%;
+	padding: var(--gl-vr-indent) var(--gl-hr-indent);
+	min-height: 50rem;
+
+	font-size: 1rem;
+}
+
+.section__in {
+	max-width: $page_width;
+	width: 100%;
+	margin: 0 auto;
+}

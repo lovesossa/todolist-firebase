@@ -1,0 +1,8 @@
+paymentSystem: Only SEPA (European local bank) transfers in EUR can be accepted
+bankOfBeneficiary: Citibank, 1 North Wall Quay, International Financial Services Centre (IFSC), Dublin 1, Ireland
+bic: CITIIE2X
+iban: IE59CITI99005170098393
+beneficiary: Andru Boyko
+accountCurrency: EUR
+taxNumber: 2922914535
+beneficiaryAddress: Chernishevskaya st. 82/12, flat 8, Kharkov, 61002, Ukraine

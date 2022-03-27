@@ -1,0 +1,48 @@
+.form_field {
+	&.form_field--file-mod {
+		// overflow: hidden;
+	}
+}
+
+.form_field__label {
+	@extend %form_el_label;
+}
+
+.form_field__input_w {
+	position: relative;
+}
+
+.form_field__input {
+	@extend %form_el_default;
+
+	.form_field--file-mod & {
+		cursor: pointer;
+
+		line-height: 100rem;
+		font-size: 0;
+	}
+}
+
+.form_field__input_value {
+	@include flex_block(row, wrap, flex-start, center, center);
+
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	padding: $input_offset;
+	width: 100%;
+	height: $input_height;
+
+	font-size: $input_font_size;
+	font-family: $font_1;
+	color: $input_text_color;
+	line-height: $input_height;
+
+	pointer-events: none;
+	overflow: hidden;
+}
+
+.form_field__input_value_title {
+	white-space: nowrap;
+}
