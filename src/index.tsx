@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 // eslint-disable-next-line import/extensions
-// import { AuthState } from 'context/auth';
+import { AuthState } from 'context/auth';
 import App from './App';
 // import './utils/i18n';
 // eslint-disable-next-line import/extensions
@@ -13,7 +13,9 @@ import './styles/main_global.scss';
 ReactDOM.render(
 	<React.StrictMode>
 		<Router>
-			<App />
+			<AuthState>
+				<App />
+			</AuthState>
 		</Router>
 	</React.StrictMode>,
 	document.getElementById('root'),

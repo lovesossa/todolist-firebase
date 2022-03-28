@@ -1,0 +1,17 @@
+.todo {
+	height: 100vh;
+	padding: var(--gl-vr-indent);
+	flex: auto;
+	background-color: $black_2;
+}
+
+.todo_list {
+	width: 100%;
+}
+
+.todo_item {
+
+	&:not(:last-child) {
+		margin-bottom: .2rem;
+	}
+}

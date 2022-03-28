@@ -1,0 +1,31 @@
+.todo_task {
+	@extend %global_flex_block_row_wrap_flex-start_center;
+
+	width: 100%;
+	padding: 2rem 2rem;
+
+	color: $white;
+
+	background-color: #2c2b2b;
+	border-radius: $gl_radius;
+	cursor: pointer;
+
+	&:hover,
+	&:focus {
+		background-color: #313030;
+	}
+}
+
+.todo_task_status {
+	width: 2.4rem;
+	height: 2.4rem;
+	margin-right: 2rem;
+
+	border: .24rem solid $white;
+	border-radius: 50%;
+}
+
+.todo_task_title {
+	font-size: 2.4rem;
+	font-weight: 400;
+}

@@ -1,0 +1,31 @@
+.account_info {
+	@extend %global_flex_block_row_wrap_flex-start_center;
+
+	margin-bottom: 1rem;
+}
+
+.account_info__logo {
+	width: 7rem;
+	height: 7rem;
+	margin-right: 1.6rem;
+
+	background-color: $white;
+	border-radius: 50%;
+}
+
+.account_info__logo_img {
+	@extend %cover_img;
+}
+
+.account_info__content {
+	color: $white;
+}
+
+.account_info__name {
+	margin-bottom: .4rem;
+	font-size: 1.8rem;
+}
+
+.account_info__email {
+	font-size: 1.4rem;
+}
