@@ -1,0 +1,47 @@
+.auth_block {
+	@extend %global_flex_block_row_wrap_center_center;
+
+	width: 100%;
+}
+
+.auth_block_in {
+	padding: var(--gl-hr-indent) 2rem;
+	max-width: 40rem;
+	width: 100%;
+
+	background-color: $black_3;
+	border-radius: $gl_radius;
+}
+
+.auth_block_title {
+	margin-bottom: 3rem;
+	font-size: 3rem;
+}
+
+.auth_block_form {
+
+}
+
+.auth_block_list {
+	margin-bottom: 1.4rem;
+}
+
+.auth_block_item {
+	&:not(:last-child) {
+		margin-bottom: 1.4rem;
+	}
+}
+
+.auth_block_submit {
+	margin-bottom: 3rem;
+}
+
+.auth_block_footer {
+	text-align: center;
+	font-size: 1.4rem;
+	color: $gray;
+}
+
+.auth_block_footer__link {
+	margin-left: .4rem;
+}

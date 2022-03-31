@@ -1,17 +1,94 @@
 .todo {
 	height: 100vh;
-	padding: var(--gl-vr-indent);
+	padding: var(--gl-vr-indent) calc(var(--gl-vr-indent) - 1rem) var(--gl-vr-indent) var(--gl-vr-indent);
 	flex: auto;
 	background-color: $black_2;
 }
 
 .todo_list {
+	display: flex;
+	flex-direction: column-reverse;
 	width: 100%;
+	margin-bottom: 2rem;
+	max-height: calc(100% - 11.6rem);
+	padding-right: 1rem;
+	margin-right: -1rem;
+	overflow-y: auto;
+
+	&::-webkit-scrollbar {
+    width: 4px;
+	}
+	&::-webkit-scrollbar-track {
+    background-color: $black_2;
+	}
+	&::-webkit-scrollbar-thumb {
+    background-color: $dark;
+	}
 }
 
 .todo_item {
 
-	&:not(:last-child) {
-		margin-bottom: .2rem;
+	&:not(:first-child) {
+		margin-bottom: .6rem;
+	}
+}
+
+.todo_in {
+	position: relative;
+	height: 100%;
+}
+
+.todo_create {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+
+	width: 100%;
+}
+
+.todo_create__btn {
+	@extend %global_flex_block_row_wrap_flex-start_center;
+
+	width: 100%;
+	padding: 2rem 2rem;
+
+	background-color: rgba($dark_2, .8);
+	border-radius: $gl_radius;
+	cursor: pointer;
+
+	&:hover,
+	&:focus-within {
+		background-color: $dark;
+	}
+}
+
+
+.todo_create__icon {
+	width: 2.2rem;
+	height: 2.2rem;
+	margin-right: 1rem;
+	flex-shrink: 0;
+
+	color: $red;
+
+	.todo_create__btn:focus-within & {
+		color: $white;
+	}
+}
+
+.todo_create__title {
+	flex: auto;
+	background-color: transparent;
+	border: 0;
+	padding: .2rem 0 0;
+	color: inherit;
+	font: inherit;
+
+	color: $white;
+	font-size: 1.8rem;
+	letter-spacing: .05em;
+
+	&::placeholder {
+		color: $red;
 	}
 }

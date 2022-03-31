@@ -15,11 +15,14 @@
 	padding: $input_offset;
 	font-size: $input_font_size;
 	font-family: $font_1;
+	font-weight: 300;
 	color: $input_text_color;
-	box-shadow: inset 0 0 0 1px $input_border_color;
-	border: none;
+	box-shadow: unset;
+	border: 1px solid $input_border_color;
 	border-radius: $input_radius;
-	background-color: $white;
+	background-color: $dark_2;
+
+	transition: border-color .3s;
 
 	&::-webkit-input-placeholder {
 		color: $input_placeholder_color;
@@ -35,7 +38,7 @@
 
 	&:hover,
 	&:focus {
-		box-shadow: 0 0 0 2px #007bff40;
+		border-color: $input_border_color_active;
 	}
 
 	&:disabled {

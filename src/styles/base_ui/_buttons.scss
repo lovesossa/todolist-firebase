@@ -1,0 +1,8 @@
+.btn_primary {
+  @extend %red_btn_1;
+  @extend %btn_size_1;
+}
+
+.btn_link {
+  @extend %base_link;
+}

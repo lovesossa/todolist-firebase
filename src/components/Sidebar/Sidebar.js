@@ -3,12 +3,17 @@ import { AccountInfo } from 'components/AccountInfo';
 import { Search } from 'components/Search';
 import { Filters } from 'components/Filters';
 
-const Sidebar = () => {
+const Sidebar = ({
+	setCurrentFilter,
+	currentFilter,
+	userData,
+	setUserData,
+}) => {
 	return (
 		<aside className="sidebar">
 			<AccountInfo />
 			<Search />
-			<Filters />
+			<Filters setCurrentFilter={setCurrentFilter} currentFilter={currentFilter} userData={userData} setUserData={setUserData} />
 		</aside>
 	);
 };

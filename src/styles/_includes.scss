@@ -13,10 +13,14 @@
 @import "blocks/todo";
 @import "blocks/account_info";
 @import "blocks/todo_task";
+@import "blocks/auth_block";
+@import "blocks/filter";
+@import "blocks/filters";
 
 
 // base_ui
 @import "base_ui/all_icons";
 @import "base_ui/buttons";
+@import "base_ui/forms/form_input";
 
 // plugins

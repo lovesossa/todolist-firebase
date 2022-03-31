@@ -1,0 +1,28 @@
+.filter {
+  @extend %global_flex_block_row_wrap_flex-start_center;
+
+  min-height: 3.4rem;
+  padding: .4rem 1rem;
+  width: 100%;
+
+  font-size: 1.6rem;
+  color: $white;
+
+  border-radius: $gl_radius;
+
+  &:hover,
+  &:focus,
+  &.filter--current_mod {
+    background-color: $dark;
+  }
+}
+
+.filter_icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  opacity: 0;
+}
+
+.filter_title {
+
+}
