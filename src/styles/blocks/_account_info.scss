@@ -5,12 +5,16 @@
 }
 
 .account_info__logo {
+	@extend %global_flex_block_row_wrap_center_center;
+
 	width: 5rem;
 	height: 5rem;
 	margin-right: 1.6rem;
 	flex-shrink: 0;
 
-	background-color: $white;
+	font-size: 2.4rem;
+
+	background-color: $dark;
 	border-radius: 50%;
 }
 

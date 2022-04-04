@@ -6,7 +6,7 @@
 }
 
 .todo_list {
-	display: flex;
+	display: none;
 	flex-direction: column-reverse;
 	width: 100%;
 	margin-bottom: 2rem;
@@ -23,6 +23,10 @@
 	}
 	&::-webkit-scrollbar-thumb {
     background-color: $dark;
+	}
+
+	&.todo_list--current_state {
+		display: flex;
 	}
 }
 
@@ -71,8 +75,14 @@
 
 	color: $red;
 
+	transition: transform .3s, color .3s;
+
 	.todo_create__btn:focus-within & {
 		color: $white;
+
+		cursor: pointer;
+		pointer-events: initial;
+		transform: rotate(45deg);
 	}
 }
 

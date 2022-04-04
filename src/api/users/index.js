@@ -22,6 +22,7 @@ const updateUserData = async (userUid, userData) => {
 
 	const userRef = doc(firebaseDB, FIREBASE_COLLECTIONS_NAME.users, userUid);
 	const res = await updateDoc(userRef, userData);
+	// const res = await userRef.update(userData);
 
 	return res;
 };

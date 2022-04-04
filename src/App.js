@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
 	Routes,
 	Route,
 	useLocation,
 } from 'react-router-dom';
-
-import { collection, addDoc, getDocs } from 'firebase/firestore';
-import { firebaseDB } from 'utils/firebase';
 
 import { PrivateRoute } from 'components/PrivateRoute';
 import * as PAGES from './pages';

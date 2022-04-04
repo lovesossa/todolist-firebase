@@ -33,8 +33,14 @@
 		width: 2rem;
 		height: 2rem;
 
+		opacity: 0;
+
 		background: url('../../images/icons/check.svg') center / contain no-repeat;
 		content: '';
+	}
+
+	.todo_task--completed_mod &::after {
+		opacity: 1;
 	}
 }
 

@@ -6,14 +6,19 @@ import { Filters } from 'components/Filters';
 const Sidebar = ({
 	setCurrentFilter,
 	currentFilter,
-	userData,
-	setUserData,
+	filtersData,
+	fetchData,
 }) => {
 	return (
 		<aside className="sidebar">
 			<AccountInfo />
 			<Search />
-			<Filters setCurrentFilter={setCurrentFilter} currentFilter={currentFilter} userData={userData} setUserData={setUserData} />
+			<Filters
+				filtersData={filtersData}
+				setCurrentFilter={setCurrentFilter}
+				currentFilter={currentFilter}
+				fetchData={fetchData}
+			/>
 		</aside>
 	);
 };

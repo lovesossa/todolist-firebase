@@ -16,42 +16,33 @@ import {
 const Homepage = () => {
 	const [currentFilter, setCurrentFilter] = useState(0);
 	const [userData, setUserData] = useState(null);
-	const [currentTodo, setCurrentTodo] = useState(null);
 	const { currentUser } = useContext(AuthContext);
 
 	const fetchData = async () => {
 		const res = await USERS_API.getUser(currentUser.uid);
 
 		setUserData(res);
-		setCurrentTodo(res.todo[currentFilter].list);
+
+		return res;
 	};
-
-	const syncData = async () => {
-		const userRef = doc(firebaseDB, FIREBASE_COLLECTIONS_NAME.users, currentUser.uid);
-
-		if (userData !== null) {
-			await updateDoc(userRef, userData);
-		}
-	};
-
-	useEffect(() => {
-		syncData();
-	}, [userData]);
 
 	useEffect(() => {
 		fetchData();
 	}, []);
 
-	useEffect(() => {
-		if (userData) {
-			setCurrentTodo(userData.todo[currentFilter].list);
-		}
-	}, [currentFilter]);
-
 	return (
 		<div className="wrapper">
-			<Sidebar setCurrentFilter={setCurrentFilter} currentFilter={currentFilter} userData={userData} setUserData={setUserData} />
-			<Todo list={currentTodo} currentFilter={currentFilter} userData={userData} setUserData={setUserData} />
+			<Sidebar
+				filtersData={userData ? userData.todo : null}
+				setCurrentFilter={setCurrentFilter}
+				currentFilter={currentFilter}
+				fetchData={fetchData}
+			/>
+			<Todo
+				todoData={userData ? userData.todo : null}
+				currentFilter={currentFilter}
+				fetchData={fetchData}
+			/>
 		</div>
 	);
 };

@@ -1,9 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AuthContext } from 'context/auth';
 import { firebaseAuth } from 'utils/firebase';
 
 const AccountInfo = () => {
 	const { currentUser } = useContext(AuthContext);
+	const {
+		displayName,
+		avatar,
+		email,
+	} = currentUser;
 
 	const handleLogout = async () => {
 		try {
@@ -13,16 +18,30 @@ const AccountInfo = () => {
 		}
 	};
 
+	const getInitials = () => {
+		if (displayName) {
+			return (
+				displayName.split(' ').map((name) => {
+					return name.split('')[0];
+				})
+			);
+		}
+
+		return null;
+	};
+
 	return (
 		<div className="account_info">
 			<div className="account_info__logo">
-				<img className="account_info__logo_img" src="#" alt="" />
+				{avatar ? (
+					<img className="account_info__logo_img" src={avatar} alt="Avatar" />
+				) : getInitials()}
 			</div>
 			<div className="account_info__content">
-				{currentUser.displayName ? (
-					<div className="account_info__name">{currentUser.displayName}</div>
+				{displayName ? (
+					<div className="account_info__name">{displayName}</div>
 				) : null}
-				<div className="account_info__email">{currentUser.email}</div>
+				<div className="account_info__email">{email}</div>
 			</div>
 			<button className="account_info__logout" type="button" onClick={handleLogout}>
 				Logout

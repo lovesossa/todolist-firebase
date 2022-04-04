@@ -1,59 +1,60 @@
+/* eslint-disable react/button-has-type */
 import React, { useState, useEffect, useContext } from 'react';
 import { USERS_API } from 'api';
 import { AuthContext } from 'context/auth';
 import { Filter } from 'components/Filter';
-import { firebaseDB } from 'utils/firebase';
-import { FIREBASE_COLLECTIONS_NAME } from 'utils/constant';
-
-import {
-	doc,
-	updateDoc,
-} from 'firebase/firestore';
 
 const Filters = ({
 	setCurrentFilter,
 	currentFilter,
-	userData,
-	setUserData,
+	filtersData,
+	fetchData,
 }) => {
-	const [filters, setFilters] = useState(null);
+	const [filters, setFilters] = useState({});
 	const { currentUser } = useContext(AuthContext);
 
-	const todoStructure = (filterName) => {
-		return {
-			...userData,
-			todo: [
-				...userData.todo,
-				{
-					title: filterName,
-					list: [],
-				},
-			],
-		};
-	};
+	const filtersLength = Object.keys(filters).length;
 
 	const handleSubmit = (e) => {
+		const pathToTodo = `todo.${filtersLength}`;
+
 		e.preventDefault();
 		const { filterNameInput } = e.target.elements;
 		const filterName = filterNameInput.value;
 
 		filterNameInput.value = '';
 
-		setUserData(todoStructure(filterName));
-		setCurrentFilter(filters.length);
+		USERS_API.updateUserData(currentUser.uid, {
+			[pathToTodo]: {
+				title: filterName,
+				list: {},
+			},
+		}).then(() => {
+			fetchData();
+		});
+
+		setFilters({
+			...filters,
+			[filtersLength]: {
+				title: filterName,
+				list: {},
+			},
+		});
+
+		setCurrentFilter(filtersLength);
 	};
 
 	useEffect(() => {
-		if (userData) {
-			setFilters(userData.todo);
+		if (filtersData) {
+			setFilters(filtersData);
 		}
-	}, [userData]);
+	}, [filtersData]);
 
 	return (
 		<div className="filters">
 			{filters ? (
 				<ul className="filters_list">
-					{filters.map(({
+					{Object.values(filters).map(({
 						title,
 					}, index) => (
 						<li
@@ -75,7 +76,7 @@ const Filters = ({
 					className="filters_create__btn"
 					type="label"
 				>
-					<div className="filters_create__icon">Icon</div>
+					<button type="reset" className="filters_create__icon" label="clear input" />
 					<input
 						className="filters_create__title"
 						type="text"

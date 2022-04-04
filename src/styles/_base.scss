@@ -72,8 +72,12 @@ button {
 }
 
 .sidebar {
+	height: 100vh;
 	width: 20%;
-	padding: var(--gl-vr-indent) var(--gl-hr-indent);
+	padding: var(--gl-vr-indent) 4rem var(--gl-vr-indent) 3rem;
+
+	overflow: hidden;
+
 	background-color: $black_3;
 }
 

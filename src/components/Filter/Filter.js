@@ -8,19 +8,21 @@ const Filter = ({
 }) => {
 	const isCurrentFilter = currentFilter === index;
 	const currentFilterState = 'filter--current_mod';
-	let filterClass = 'filter';
+	let filterMod = '';
 
 	if (isCurrentFilter) {
-		filterClass += ` ${currentFilterState}`;
+		filterMod += ` ${currentFilterState}`;
 	}
 
 	return (
 		<button
-			className={filterClass}
+			className={`filter ${filterMod}`}
 			type="button"
 			onClick={() => setCurrentFilter(index)}
 		>
-			<div className="filter_icon">Icon</div>
+			<div className="filter_icon">
+				<div className="filter_icon__in" />
+			</div>
 			<div className="filter_title">{title}</div>
 		</button>
 	);

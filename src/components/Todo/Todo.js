@@ -1,56 +1,86 @@
-import React, { useEffect } from 'react';
+/* eslint-disable react/button-has-type */
+import React, { useEffect, useContext, useState } from 'react';
 import { TodoTask } from 'components/TodoTask';
+import { AuthContext } from 'context/auth';
+import { USERS_API } from 'api';
 
 const Todo = ({
-	list,
-	userData,
-	setUserData,
+	todoData,
 	currentFilter,
 }) => {
+	const { currentUser } = useContext(AuthContext);
+
+	const [todo, setTodo] = useState(todoData);
+	const listCurrentState = 'todo_list todo_list--current_state';
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const { addTaskInput } = e.target.elements;
 		const taskName = addTaskInput.value;
+		const taskIndex = Object.keys(todo[currentFilter].list).length;
+		const pathToList = `todo.${currentFilter}.list.${taskIndex}`;
 
 		addTaskInput.value = '';
 
-		const newData = { ...userData };
-		newData.todo[currentFilter].list.push({
+		USERS_API.updateUserData(currentUser.uid, {
+			[pathToList]: {
+				title: taskName,
+				completed: false,
+				important: false,
+			},
+		});
+
+		let newData = { ...todo };
+		newData[currentFilter].list[taskIndex] = {
 			title: taskName,
 			completed: false,
 			important: false,
-		});
+		};
 
-		setUserData(newData);
+		setTodo(newData);
 	};
+
+	useEffect(() => {
+		if (todoData) {
+			setTodo(todoData);
+		}
+	}, [todoData]);
 
 	return (
 		<section className="todo">
 			<div className="todo_in">
-				{list && list.length ? (
-					<ul className="todo_list">
-						{list.map(({
-							title,
-							completed,
-							important,
-						}, index) => (
-							<li className="todo_item" key={index}>
+				{todo ? Object.entries(todo).map(([i, obj]) => (
+					<ul
+						className={Number(i) === currentFilter ? listCurrentState : 'todo_list'}
+						key={i}
+					>
+						{Object.entries(obj.list).map(([
+							j,
+							{
+								title,
+								completed,
+								important,
+							},
+						]) => (
+							<li className="todo_item" key={`${i}_${j}`}>
 								<TodoTask
 									title={title}
-									completed={completed}
-									important={important}
+									isCompleted={completed}
+									isImportant={important}
+									index={j}
+									currentFilter={currentFilter}
 								/>
 							</li>
 						))}
 					</ul>
-				) : null}
+				)) : null}
 
 				<form className="todo_create" onSubmit={handleSubmit}>
 					<label
 						className="todo_create__btn"
 						type="label"
 					>
-						<div className="todo_create__icon">
+						<button className="todo_create__icon" type="reset" label="clear input">
 							<svg className="icon" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
 								<g id="web-app" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
 									<g id="plus" fill="currentColor">
@@ -58,7 +88,7 @@ const Todo = ({
 									</g>
 								</g>
 							</svg>
-						</div>
+						</button>
 						<input
 							className="todo_create__title"
 							type="text"

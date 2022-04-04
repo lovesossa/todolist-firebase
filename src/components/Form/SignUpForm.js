@@ -3,11 +3,12 @@ import { PROMISE_STATES } from 'utils';
 import { NavLink, useNavigate, Navigate } from 'react-router-dom';
 import { firebaseAuth } from 'utils/firebase';
 import USERS_API from 'api/users';
+import { AuthContext } from 'context/auth';
 import {
 	createUserWithEmailAndPassword,
 	updateProfile,
 } from 'firebase/auth';
-import { AuthContext } from 'context/auth';
+
 import FormField from './FormField';
 import { signUpFormData } from './constant';
 
@@ -35,8 +36,8 @@ const SignUpForm = () => {
 			const newUser = {
 				displayName: userDisplayName,
 				email: userEmail,
-				todo: [
-					{
+				todo: {
+					0: {
 						title: 'All tasks',
 						list: [
 							{
@@ -46,7 +47,7 @@ const SignUpForm = () => {
 							},
 						],
 					},
-				],
+				},
 			};
 
 			const authResult = await createUserWithEmailAndPassword(firebaseAuth, userEmail, userPassword);
@@ -57,10 +58,12 @@ const SignUpForm = () => {
 
 			const { uid } = authResult.user;
 
-			await USERS_API.addNewUser(newUser, uid);
+			await USERS_API.addNewUser(newUser, uid)
+				.then(() => {
+					navigate('/');
+				});
 
 			setLoadingStatus(PROMISE_STATES.fulfilled);
-			// navigate('/');
 		} catch (error) {
 			setLoadingStatus(PROMISE_STATES.rejected);
 		}
