@@ -76,10 +76,7 @@ const Todo = ({
 				)) : null}
 
 				<form className="todo_create" onSubmit={handleSubmit}>
-					<label
-						className="todo_create__btn"
-						type="label"
-					>
+					<label className="todo_create__btn" htmlFor="addTaskInput">
 						<button className="todo_create__icon" type="reset" label="clear input">
 							<svg className="icon" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
 								<g id="web-app" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -94,6 +91,7 @@ const Todo = ({
 							type="text"
 							name="addTaskInput"
 							placeholder="Add task"
+							id="addTaskInput"
 						/>
 					</label>
 				</form>

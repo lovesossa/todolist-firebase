@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { AuthContext } from 'context/auth';
 import { firebaseAuth } from 'utils/firebase';
+import { NavLink } from 'react-router-dom';
 
 const AccountInfo = () => {
 	const { currentUser } = useContext(AuthContext);
@@ -43,9 +44,12 @@ const AccountInfo = () => {
 				) : null}
 				<div className="account_info__email">{email}</div>
 			</div>
-			<button className="account_info__logout" type="button" onClick={handleLogout}>
+			<button className="account_info__link" type="button" onClick={handleLogout}>
 				Logout
 			</button>
+			<NavLink to="/admin" className="account_info__link">
+				Admin pannel
+			</NavLink>
 		</div>
 	);
 };

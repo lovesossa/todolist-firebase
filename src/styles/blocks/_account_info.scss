@@ -23,7 +23,7 @@
 }
 
 .account_info__content {
-	margin-right: 1rem;
+	margin-right: auto;
 	color: $white;
 }
 
@@ -36,9 +36,9 @@
 	font-size: 1.4rem;
 }
 
-.account_info__logout {
+.account_info__link {
 	@extend %base_link;
 
-	margin-left: auto;
+	margin-left: 1rem;
 	font-size: 1.2rem;
 }

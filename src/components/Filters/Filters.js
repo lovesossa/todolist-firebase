@@ -72,16 +72,14 @@ const Filters = ({
 				</ul>
 			) : null}
 			<form className="filters_create" onSubmit={handleSubmit}>
-				<label
-					className="filters_create__btn"
-					type="label"
-				>
+				<label className="filters_create__btn" htmlFor="filterNameInput">
 					<button type="reset" className="filters_create__icon" label="clear input" />
 					<input
 						className="filters_create__title"
 						type="text"
 						name="filterNameInput"
 						placeholder="New list"
+						id="filterNameInput"
 					/>
 				</label>
 			</form>

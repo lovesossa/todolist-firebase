@@ -25,6 +25,15 @@ const App = () => {
 					path="/"
 					exact
 				/>
+				<Route
+					element={(
+						<PrivateRoute adminRoute>
+							<PAGES.AdminPannelPage />
+						</PrivateRoute>
+					)}
+					path="/admin"
+					exact
+				/>
 			</Routes>
 		</div>
 	);

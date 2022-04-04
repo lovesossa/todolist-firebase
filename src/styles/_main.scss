@@ -1,0 +1,21 @@
+.sidebar {
+  @extend %global_flex_block_column_nowrap_flex-start_stretch;
+
+	height: 100vh;
+	width: 20%;
+	padding: var(--gl-vr-indent) 4rem var(--gl-vr-indent) 3rem;
+
+	overflow: hidden;
+
+	background-color: $black_3;
+}
+
+.sidebar_link {
+  @extend %red_btn_1;
+  @extend %btn_size_1;
+
+  width: 100%;
+  order: 4;
+}
+
+
