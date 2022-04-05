@@ -1,0 +1,100 @@
+.admin_pannel {
+  padding: var(--gl-vr-indent);
+}
+
+.admin_pannel_navigation {
+  margin-bottom: 2rem;
+}
+
+.admin_pannel_title {
+  margin-bottom: 2rem;
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.admin_pannel_table {
+}
+
+.admin_pannel_table__item {
+  width: 50%;
+
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+}
+
+.user_details {
+  @extend %global_flex_block_row_wrap_flex-start_center;
+
+  padding: 1.6rem 2rem;
+
+  border-radius: $gl_radius;
+  background-color: $black_3;
+}
+
+.user_details_avatar {
+  width: 4rem;
+  height: 4rem;
+  margin-right: 4rem;
+  background-color: $dark;
+  border-radius: 50%;
+}
+
+.user_details_name {
+  margin-right: 4rem;
+}
+
+.user_details_email {
+  margin-right: 4rem;
+}
+
+.user_details_todos {
+
+}
+
+.user_details_controls {
+  position: relative;
+  margin-left: auto;
+}
+
+.user_details_controls__label {
+  @extend %base_link;
+}
+
+.user_details_controls__dropdown {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+
+  border-radius: $gl_radius;
+
+  transition: opacity .3s;
+
+  .user_details_controls:hover & {
+    opacity: 1;
+    pointer-events: initial;
+  }
+}
+
+.user_details_controls__item {
+  width: 100%;
+}
+
+.user_details_controls__button {
+  width: 100%;
+  padding: 1rem 1.6rem;
+
+  color: rgba($white, .8);
+  letter-spacing: .02em;
+  background-color: $dark;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: $dark_2;
+  }
+}

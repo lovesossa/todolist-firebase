@@ -32,10 +32,14 @@ const SignUpForm = () => {
 
 		try {
 			setLoadingStatus(PROMISE_STATES.pending);
+			const authResult = await createUserWithEmailAndPassword(firebaseAuth, userEmail, userPassword);
+			const { uid } = authResult.user;
 
 			const newUser = {
 				displayName: userDisplayName,
 				email: userEmail,
+				role: 'admin',
+				id: uid,
 				todo: {
 					0: {
 						title: 'All tasks',
@@ -50,13 +54,9 @@ const SignUpForm = () => {
 				},
 			};
 
-			const authResult = await createUserWithEmailAndPassword(firebaseAuth, userEmail, userPassword);
-
 			await updateProfile(authResult.user, {
 				displayName: newUser.displayName,
 			});
-
-			const { uid } = authResult.user;
 
 			await USERS_API.addNewUser(newUser, uid)
 				.then(() => {

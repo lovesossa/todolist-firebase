@@ -2,18 +2,20 @@ import React, { useContext, useEffect } from 'react';
 import { AuthContext } from 'context/auth';
 import { firebaseAuth } from 'utils/firebase';
 import { NavLink } from 'react-router-dom';
+import { USER_ROLES } from 'utils';
 
 const AccountInfo = () => {
-	const { currentUser } = useContext(AuthContext);
+	const { currentUser, currentUserRole } = useContext(AuthContext);
+
 	const {
 		displayName,
 		avatar,
 		email,
 	} = currentUser;
 
-	const handleLogout = async () => {
+	const handleLogout = () => {
 		try {
-			await firebaseAuth.signOut();
+			firebaseAuth.signOut();
 		}	catch {
 			// console.log(); //!
 		}
@@ -47,9 +49,11 @@ const AccountInfo = () => {
 			<button className="account_info__link" type="button" onClick={handleLogout}>
 				Logout
 			</button>
-			<NavLink to="/admin" className="account_info__link">
-				Admin pannel
-			</NavLink>
+			{currentUserRole === USER_ROLES.admin ? (
+				<NavLink to="/admin" className="account_info__link">
+					Admin pannel
+				</NavLink>
+			) : null }
 		</div>
 	);
 };

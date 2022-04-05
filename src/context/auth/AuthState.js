@@ -19,6 +19,10 @@ const AuthState = ({ children }) => {
 
 			if (res) {
 				setCurrentUserAdditionalData(res);
+
+				if (res.role === USER_ROLES.admin) {
+					setCurrentUserRole(USER_ROLES.admin);
+				}
 			}
 		} catch (error) {
 			console.log(error.message);
@@ -31,7 +35,6 @@ const AuthState = ({ children }) => {
 				user.getIdTokenResult().then(idTokenResult => {
 					setCurrentUser(user);
 					getUserAdditionalData(user.uid);
-					setGuestUser(USER_ROLES.user);
 				});
 			} else {
 				setCurrentUser(null);

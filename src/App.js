@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 
 import { PrivateRoute } from 'components/PrivateRoute';
+import { AdminRoute } from 'components/AdminRoute';
 import * as PAGES from './pages';
 
 const App = () => {
@@ -27,12 +28,11 @@ const App = () => {
 				/>
 				<Route
 					element={(
-						<PrivateRoute adminRoute>
+						<AdminRoute>
 							<PAGES.AdminPannelPage />
-						</PrivateRoute>
+						</AdminRoute>
 					)}
 					path="/admin"
-					exact
 				/>
 			</Routes>
 		</div>
