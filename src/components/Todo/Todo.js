@@ -20,7 +20,6 @@ const Todo = ({
 		const currentList = Object.keys(todo[currentFilter].list);
 		const currentListLength = currentList.length;
 		const taskIndex = currentListLength ? (Number(currentList[currentListLength - 1]) + 1) : 0;
-		console.log(taskIndex); //!
 		const pathToList = `todo.${currentFilter}.list.${taskIndex}`;
 
 		addTaskInput.value = '';
@@ -60,6 +59,9 @@ const Todo = ({
 	return (
 		<section className="todo">
 			<div className="todo_in">
+				{todo ? (
+					<h1 className="todo_title">Empty.</h1>
+				) : null}
 				{todo ? Object.entries(todo).map(([i, obj]) => (
 					<ul
 						className={Number(i) === currentFilter ? listCurrentState : 'todo_list'}
