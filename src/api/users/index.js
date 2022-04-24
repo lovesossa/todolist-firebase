@@ -4,8 +4,9 @@ import {
 	getDoc,
 	doc,
 	updateDoc,
-	deleteDoc,
+	deleteField,
 } from 'firebase/firestore';
+
 import { FIREBASE_COLLECTIONS_NAME } from 'utils/constant';
 
 const addNewUser = async (user, userUid) => {
@@ -27,6 +28,18 @@ const updateUserData = async (userUid, userData) => {
 	return res;
 };
 
+const deleteUserData = async (userUid, template) => {
+	if (!userUid) return null;
+	if (!template) return null;
+
+	const userRef = doc(firebaseDB, FIREBASE_COLLECTIONS_NAME.users, userUid);
+	const res = await updateDoc(userRef, {
+		[template]: deleteField(),
+	});
+
+	return res;
+};
+
 const getUser = async id => {
 	if (!id) return null;
 
@@ -43,6 +56,7 @@ const USERS_API = {
 	addNewUser,
 	updateUserData,
 	getUser,
+	deleteUserData,
 };
 
 export default USERS_API;

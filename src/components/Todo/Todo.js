@@ -17,7 +17,10 @@ const Todo = ({
 		e.preventDefault();
 		const { addTaskInput } = e.target.elements;
 		const taskName = addTaskInput.value;
-		const taskIndex = Object.keys(todo[currentFilter].list).length;
+		const currentList = Object.keys(todo[currentFilter].list);
+		const currentListLength = currentList.length;
+		const taskIndex = currentListLength ? (Number(currentList[currentListLength - 1]) + 1) : 0;
+		console.log(taskIndex); //!
 		const pathToList = `todo.${currentFilter}.list.${taskIndex}`;
 
 		addTaskInput.value = '';
@@ -36,6 +39,14 @@ const Todo = ({
 			completed: false,
 			important: false,
 		};
+
+		setTodo(newData);
+	};
+
+	const onDeleteTask = (index) => {
+		const newData = { ...todo };
+
+		delete newData[currentFilter].list[index];
 
 		setTodo(newData);
 	};
@@ -67,8 +78,9 @@ const Todo = ({
 									title={title}
 									isCompleted={completed}
 									isImportant={important}
-									index={j}
+									taskId={j}
 									currentFilter={currentFilter}
+									onDeleteTask={onDeleteTask}
 								/>
 							</li>
 						))}

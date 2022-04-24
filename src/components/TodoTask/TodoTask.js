@@ -12,8 +12,8 @@ const TodoTask = ({
 	isCompleted,
 	isImportant,
 	currentFilter,
-	index,
-	fetchData,
+	taskId,
+	onDeleteTask,
 }) => {
 	const [completed, setCompleted] = useState(isCompleted);
 	const [important, setImportant] = useState(isImportant);
@@ -23,8 +23,10 @@ const TodoTask = ({
 
 	const importantClass = 'todo_task--important_mod';
 	const completedClass = 'todo_task--completed_mod';
-	const pathToCompleted = `todo.${currentFilter}.list.${index}.completed`;
-	const pathToImportant = `todo.${currentFilter}.list.${index}.important`;
+	const taskTemplate = `todo.${currentFilter}.list.${taskId}`;
+	const pathToCompleted = `${taskTemplate}.completed`;
+	const pathToImportant = `${taskTemplate}.important`;
+	const pathToTitle = `${taskTemplate}.title`;
 
 	const handleToggleCompleted = () => {
 		if (completed) {
@@ -42,22 +44,85 @@ const TodoTask = ({
 		}
 	};
 
+	const handleToggleImportant = (e) => {
+		if (important) {
+			setImportant(false);
+			$taskRef.current.classList.remove(importantClass);
+			USERS_API.updateUserData(currentUser.uid, {
+				[pathToImportant]: false,
+			});
+		} else {
+			setImportant(true);
+			$taskRef.current.classList.add(importantClass);
+			USERS_API.updateUserData(currentUser.uid, {
+				[pathToImportant]: true,
+			});
+		}
+	};
+
+	let debounce;
+
+	const handleInputTaskName = (e) => {
+		e.preventDefault();
+
+		const taskName = e.target.value;
+
+		clearTimeout(debounce);
+
+		debounce = setTimeout(() => {
+			USERS_API.updateUserData(currentUser.uid, {
+				[pathToTitle]: taskName,
+			});
+		}, 1000);
+	};
+
+	const handleDelete = () => {
+		onDeleteTask(taskId);
+		USERS_API.deleteUserData(currentUser.uid, taskTemplate);
+	};
+
 	useEffect(() => {
 		if (isCompleted) {
 			$taskRef.current.classList.add(completedClass);
 		}
-	}, [isCompleted]);
+		if (isImportant) {
+			$taskRef.current.classList.add(importantClass);
+		}
+	}, [isCompleted, isImportant]);
 
 	return (
-		<button
+		<label
 			className="todo_task"
-			type="button"
-			onClick={handleToggleCompleted}
 			ref={$taskRef}
+			htmlFor={`taskNameInput_${taskId}`}
 		>
-			<div className="todo_task_status" />
-			<div className="todo_task_title">{title}</div>
-		</button>
+			<button
+				type="button"
+				className="todo_task_important"
+				onClick={handleToggleImportant}
+				label="toggle important"
+			/>
+			<button
+				type="button"
+				className="todo_task_status"
+				onClick={handleToggleCompleted}
+				label="toggle сompleted"
+			/>
+			<input
+				className="todo_task_title"
+				defaultValue={title}
+				name="taskName"
+				type="text"
+				id={`taskNameInput_${taskId}`}
+				onInput={handleInputTaskName}
+			/>
+			<button
+				type="button"
+				className="todo_task_delete"
+				onClick={handleDelete}
+				label="delete task"
+			/>
+		</label>
 	);
 };
 

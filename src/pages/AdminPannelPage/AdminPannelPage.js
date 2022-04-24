@@ -49,7 +49,6 @@ const AdminPannelPage = () => {
 			</div>
 			<div className="admin_pannel_title">Users:</div>
 			<ul className="admin_pannel_table">
-				{console.log(usersData)}
 				{usersData ? usersData.map(({
 					displayName,
 					email,
@@ -62,7 +61,6 @@ const AdminPannelPage = () => {
 							<div className="user_details_avatar">{avatar}</div>
 							<div className="user_details_name">{displayName}</div>
 							<div className="user_details_email">{email}</div>
-							{/* <div className="user_details_todos">{Object.keys(todo).length}</div> */}
 							<div className="user_details_controls">
 								<div className="user_details_controls__label">Settings</div>
 								<ul className="user_details_controls__dropdown">
